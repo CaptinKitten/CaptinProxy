@@ -62,7 +62,7 @@ export default {
         if (request.method !== "GET" && request.method !== "HEAD") {
             init.body = await request.text();
         }
-
-        return fetch(`https://${path[1]}.roblox.com/${path.slice(2).join("/")}${url.search}`, init);
+        return "hi";
+        //return fetch(`https://${path[1]}.roblox.com/${path.slice(2).join("/")}${url.search}`, init);
     }
 };
