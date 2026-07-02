@@ -45,13 +45,14 @@ export default {
 
         if (!domains.includes(path[1])) 
             return new Response(JSON.stringify({ message: "Specified subdomain is not allowed." }), { status: 401 });
-
+        if (!env.token)
+            return new Response(JSON.stringify({ message: "The token environment variable is not set, or the script couldn't read it. Try again later." }), { status: 500 });
         const headers = new Headers(request.headers);
         headers.delete("host");
         headers.delete("roblox-id");
         headers.delete("user-agent");
         headers["user-agent"] = "Mozilla/5.0 (Windows NT 10.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36";
-
+        headers["Cookie"] = ".ROBLOSECURITY=" + env.token;
 
         const init = {
             method: request.method,
